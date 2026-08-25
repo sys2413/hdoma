@@ -1,0 +1,342 @@
+/* ═══════════════════════════════════════════════════════════
+   훈연도마 — 공통 스타일
+   Stitch 디자인 시스템(DESIGN.md) 반영판
+
+   컨셉: Minimalist-Brutalist / "Time as an Ingredient"
+   - 모서리 반경 0. 그림자 없음.
+   - 깊이는 색의 단계(콘크리트 → 차콜)로만 표현.
+   - 1px 실선으로 영역을 나눔.
+   색과 글꼴은 여기서만 고치면 전 페이지에 반영됩니다.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ───────── 웹폰트 ─────────
+   한글 제목은 SB 어그로체, 라틴·숫자는 Be Vietnam Pro가 맡습니다.
+   글꼴 대체는 글자 단위로 일어나서, 한 선언으로 두 글꼴이 나뉘어 걸립니다. */
+@font-face {
+  font-family: 'Aggravo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff') format('woff');
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Aggravo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Aggravo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root{
+  /* ── 색: 콘크리트 · 나무 · 불씨 ── */
+  --surface:   #FCF9F4;   /* 가장 밝은 바탕 */
+  --bg:        #EDEAE5;   /* 밝은 회색 콘크리트 벽 */
+  --bg-warm:   #F6F3EE;
+  --bg-deep:   #E5E2DD;
+  --ink:       #201E1B;
+  --ink-soft:  #57423B;   /* 따뜻한 갈색 계열 보조 글자 */
+  --ink-faint: #8A726A;
+  --line:      #D6D1C9;
+  --line-warm: #DDC0B7;
+  --ember:     #9C3D14;   /* 훈연 불씨 */
+  --ember-dp:  #7B2700;   /* 눌렀을 때 */
+  --ember-lt:  #C4622E;
+  /* 예약 문의 버튼 — Stitch 시안의 Reserve Now 색.
+     테마가 바뀌어도 흰 글씨가 묻히지 않게 바탕을 짙게 고정합니다. */
+  --cta:       #9C3D14;
+  --cta-hover: #7B2700;
+  --on-cta:    #FFFFFF;
+  --wood:      #B0794A;   /* 나무도마 */
+  --char:      #2E2A26;   /* 검은 껍질 — 반전 구간 */
+  --on-char:   #F3F0EB;
+  --on-char-hi:#FFFFFF;
+  --char-line: rgba(255,255,255,.18);
+  --header-bg: rgba(252,249,244,.86);
+  --ghost:     rgba(32,30,27,.055);  /* 거대 배경 글자 */
+
+  /* ── 글꼴 ── */
+  --display: 'Be Vietnam Pro', 'Aggravo', 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+  --sans:    'Noto Sans KR', 'Apple SD Gothic Neo', system-ui, sans-serif;
+  --mono:    'JetBrains Mono', ui-monospace, 'Courier New', monospace;
+  /* 읽는 글 — 메뉴 설명처럼 호흡이 긴 문장은 명조로 받습니다.
+     제목(고딕)·라벨(모노)과 대비되며 훈연·나무의 온도를 냅니다. */
+  --reading: 'Noto Serif KR', 'Nanum Myeongjo', Georgia, 'Apple SD Gothic Neo', serif;
+  --serif:   var(--display);  /* 옛 이름 호환 */
+
+  /* ── 간격: 8px 단위 ── */
+  --wrap: 1280px;
+  --pad: clamp(20px, 5vw, 40px);
+  --section: clamp(64px, 10vw, 120px);
+}
+
+/* ───────── 다크 모드 ─────────
+   밤에 가게 조명만 켜둔 느낌. 벽은 어두워지지만
+   불씨색과 도마 나무색은 살아 있게 조금 밝힙니다. */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --surface:   #1C1A17;
+    --bg:        #16150F;
+    --bg-warm:   #211E1A;
+    --bg-deep:   #100F0C;
+    --ink:       #F3F0EB;
+    --ink-soft:  #C0AFA6;
+    --ink-faint: #8A726A;
+    --line:      #363029;
+    --line-warm: #4A3A33;
+    --ember:     #E0814A;
+    --ember-dp:  #FFB59A;
+    --ember-lt:  #FFB59A;
+    --cta:       #B4491B;
+    --cta-hover: #C4622E;
+    --on-cta:    #FFFFFF;
+    --wood:      #C89460;
+    --char:      #262219;
+    --char-line: rgba(255,255,255,.14);
+    --header-bg: rgba(28,26,23,.86);
+    --ghost:     rgba(243,240,235,.05);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --surface:   #1C1A17;
+  --bg:        #16150F;
+  --bg-warm:   #211E1A;
+  --bg-deep:   #100F0C;
+  --ink:       #F3F0EB;
+  --ink-soft:  #C0AFA6;
+  --ink-faint: #8A726A;
+  --line:      #363029;
+  --line-warm: #4A3A33;
+  --ember:     #E0814A;
+  --ember-dp:  #FFB59A;
+  --ember-lt:  #FFB59A;
+  --cta:       #B4491B;
+  --cta-hover: #C4622E;
+  --on-cta:    #FFFFFF;
+  --wood:      #C89460;
+  --char:      #262219;
+  --char-line: rgba(255,255,255,.14);
+  --header-bg: rgba(28,26,23,.86);
+  --ghost:     rgba(243,240,235,.05);
+  color-scheme: dark;
+}
+
+/* ───────── 기본 ───────── */
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--surface);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:16px;
+  line-height:1.75;
+  letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+  transition:background-color .35s ease, color .35s ease;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{
+  font-family:var(--display); font-weight:700;
+  line-height:1.2; letter-spacing:-.02em; margin:0;
+  text-wrap:balance;
+}
+p{ margin:0; }
+a{ color:inherit; }
+img{ max-width:100%; height:auto; display:block; }
+
+/* 모서리 반경 0 — 이 디자인의 규칙입니다 */
+button, input, textarea, select, .btn, .chip, .badge{ border-radius:0; }
+
+:focus-visible{ outline:2px solid var(--ember); outline-offset:3px; }
+
+.wrap{ max-width:var(--wrap); margin:0 auto; padding-inline:var(--pad); }
+section{ padding-block:var(--section); }
+
+/* ───────── 라벨 / 섹션 제목 ───────── */
+.label{
+  font-family:var(--mono); font-size:12px; font-weight:400;
+  letter-spacing:.1em; text-transform:uppercase; line-height:16px;
+  color:var(--ember); display:flex; align-items:center; gap:1em;
+}
+.label::after{ content:""; flex:1; height:1px; background:var(--line); }
+.sec-head{ margin-bottom:clamp(32px,5vw,56px); }
+.sec-head h2{ font-size:clamp(28px,4vw,48px); line-height:1.16; margin-top:24px; }
+.sec-head .sub{ margin-top:16px; color:var(--ink-soft); max-width:52ch; font-size:18px; line-height:32px; letter-spacing:.02em; }
+
+/* ───────── 인용 — 세로 1px 선을 양쪽에 ───────── */
+.pull{
+  font-family:var(--display); font-weight:700;
+  font-size:clamp(22px,3.4vw,34px); line-height:1.5; letter-spacing:-.02em;
+  color:var(--ink); margin:0; padding-left:28px; position:relative;
+}
+.pull::before{
+  content:""; position:absolute; left:0; top:.3em; bottom:.2em; width:1px;
+  background:var(--ember);
+}
+
+/* ───────── 버튼 ───────── */
+.btn{
+  display:inline-block; text-decoration:none;
+  font-family:var(--sans); font-size:14px; font-weight:400; letter-spacing:.02em;
+  padding:14px 28px; transition:background-color .2s, color .2s, border-color .2s;
+}
+.btn-solid{ background:var(--ember); color:#fff; border:1px solid var(--ember); }
+.btn-solid:hover{ background:var(--ember-dp); border-color:var(--ember-dp); }
+.btn-line{ background:transparent; border:1px solid var(--ink); color:var(--ink); }
+.btn-line:hover{ background:var(--ink); color:var(--surface); }
+
+/* ───────── 상단 바 ───────── */
+header{
+  position:sticky; top:0; z-index:50;
+  background:var(--header-bg);
+  backdrop-filter:blur(12px) saturate(1.2);
+  border-bottom:1px solid var(--line);
+}
+.nav{ display:flex; align-items:center; justify-content:space-between; height:72px; gap:16px; }
+.brand{ display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--ink); }
+.brand svg{ flex:none; color:var(--ember); }
+.brand .bname{ font-family:var(--display); font-weight:700; font-size:20px; letter-spacing:-.01em; white-space:nowrap; }
+.nav-right{ display:flex; align-items:center; gap:clamp(12px,2.5vw,28px); }
+.nav ul{ display:flex; gap:clamp(14px,2.5vw,28px); list-style:none; margin:0; padding:0; }
+.nav a{
+  text-decoration:none; font-size:14px; color:var(--ink-soft);
+  position:relative; padding-block:6px; transition:color .2s;
+}
+.nav a::after{
+  content:""; position:absolute; left:0; bottom:0; width:100%; height:1px;
+  background:var(--ember); transform:scaleX(0); transform-origin:left; transition:transform .3s;
+}
+.nav a:hover{ color:var(--ink); }
+.nav a:hover::after, .nav a[aria-current]::after{ transform:scaleX(1); }
+.nav a[aria-current]{ color:var(--ember); }
+
+/* Stitch 시안의 'Reserve Now' 버튼 그대로:
+   각 없는 사각형 · 짙은 불씨색 바탕 · 흰 라벨 · 자간을 살짝 벌린 작은 글씨 */
+.nav-cta{
+  background:var(--cta); color:var(--on-cta); text-decoration:none;
+  font-size:13px; font-weight:500; letter-spacing:.06em; line-height:1;
+  padding:13px 22px;
+  border:1px solid var(--cta); transition:background-color .2s, border-color .2s;
+  white-space:nowrap;
+}
+.nav-cta:hover{ background:var(--cta-hover); border-color:var(--cta-hover); color:var(--on-cta); }
+.nav-cta::after{ display:none; }
+
+.themetoggle{
+  width:36px; height:36px; padding:0; cursor:pointer;
+  border:1px solid var(--line); background:transparent; color:var(--ink-soft);
+  display:grid; place-items:center; font-size:15px; line-height:1;
+  transition:border-color .25s, background-color .25s, color .25s;
+}
+.themetoggle:hover{ border-color:var(--ember); color:var(--ember); }
+.themetoggle .icon{ display:block; }
+
+/* ───────── 페이지 머리 (하위 페이지) ───────── */
+.pagehead{ position:relative; padding-block:clamp(48px,8vw,88px) clamp(32px,5vw,56px); overflow:hidden; }
+.pagehead .wrap{ position:relative; }
+.pagehead h1{ font-size:clamp(36px,6.5vw,72px); line-height:1.05; margin-top:20px; }
+.pagehead .sub{ margin-top:20px; color:var(--ink-soft); max-width:46ch; font-size:18px; line-height:32px; letter-spacing:.02em; }
+/* 거대한 42 — 오른쪽 위에 도장처럼 */
+.pagehead .stamp{
+  position:absolute; top:-.18em; right:var(--pad); pointer-events:none;
+  font-family:var(--display); font-weight:800; font-size:clamp(120px,18vw,240px);
+  line-height:1; letter-spacing:-.04em; color:var(--ghost); user-select:none;
+}
+.backlink{
+  display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+  font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ink-faint); margin-bottom:28px; transition:color .2s, gap .2s;
+}
+.backlink:hover{ color:var(--ember); gap:12px; }
+
+/* ───────── 42시간 공정 띠 ───────── */
+.strip{
+  background:var(--char); color:var(--on-char);
+  padding-block:clamp(56px,8vw,96px); position:relative; overflow:hidden;
+}
+.strip .ghost{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  font-family:var(--display); font-weight:800; font-size:clamp(140px,20vw,300px);
+  line-height:1; letter-spacing:-.04em; white-space:nowrap;
+  color:rgba(255,255,255,.045); pointer-events:none; user-select:none;
+}
+.strip .wrap{ position:relative; }
+.timeline{
+  display:grid; grid-template-columns:repeat(3,1fr); margin:0;
+  border-top:1px solid var(--char-line); border-bottom:1px solid var(--char-line);
+  padding-block:clamp(28px,4vw,44px);
+}
+.phase{ position:relative; padding-right:24px; }
+.phase .p{ font-family:var(--mono); font-size:12px; letter-spacing:.1em; color:var(--ember-lt); }
+.phase dt{ font-family:var(--display); font-weight:700; font-size:clamp(20px,2.6vw,26px); color:var(--on-char-hi); margin-top:14px; }
+.phase .mark{ display:block; width:10px; height:10px; background:var(--ember-lt); margin-top:20px; }
+.phase dd{ margin:16px 0 0; font-size:14px; line-height:26px; color:rgba(243,240,235,.6); max-width:26ch; }
+/* 이정표를 잇는 1px 선 */
+.phase:not(:last-child)::after{
+  content:""; position:absolute; left:20px; right:24px; top:calc(100% - 100% + 0px);
+  height:0;
+}
+.strip-note{
+  margin-top:clamp(28px,4vw,40px); font-size:14px; line-height:28px;
+  color:rgba(243,240,235,.6); max-width:64ch;
+}
+.strip-note b{ color:var(--on-char-hi); font-weight:400; }
+
+/* ───────── 사진 액자 ───────── */
+.frame{ border:1px solid var(--line); padding:12px; background:var(--bg-warm); }
+.frame img{ width:100%; }
+
+/* ───────── 푸터 ───────── */
+footer{ background:var(--bg-deep); border-top:1px solid var(--line); padding-block:clamp(56px,8vw,96px) 40px; }
+.foot-grid{ display:grid; grid-template-columns:1fr 1.25fr; gap:clamp(32px,5vw,72px); }
+.foot-brand .shopname-sm{ font-family:var(--display); font-weight:700; font-size:24px; margin-bottom:14px; }
+.foot-brand p{ font-size:14px; line-height:26px; color:var(--ink-soft); max-width:26ch; }
+.hours{ margin:32px 0 0; }
+.hours dt{ font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ember); margin-bottom:8px; }
+.hours dd{ margin:0 0 20px; font-family:var(--display); font-weight:700; font-size:20px; letter-spacing:-.01em; }
+.hours dd small{ display:block; font-family:var(--sans); font-weight:300; font-size:13px; color:var(--ink-soft); margin-top:4px; letter-spacing:.01em; }
+.info{ list-style:none; margin:0; padding:0; }
+.info li{ display:grid; grid-template-columns:96px 1fr; gap:16px; padding:14px 0; border-bottom:1px solid var(--line); font-size:14px; }
+.info li:first-child{ border-top:1px solid var(--line); }
+.info .k{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); padding-top:3px; }
+.info a{ color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line-warm); }
+.info a:hover{ border-color:var(--ember); color:var(--ember); }
+.counter-note{
+  margin-top:28px; padding:20px 22px; background:var(--surface);
+  border-left:1px solid var(--wood); font-size:14px; line-height:26px; color:var(--ink-soft);
+}
+.copyright{
+  margin-top:clamp(40px,6vw,72px); padding-top:24px; border-top:1px solid var(--line);
+  display:flex; flex-wrap:wrap; gap:10px 24px; justify-content:space-between;
+  font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--ink-faint);
+}
+
+/* ───────── 스크롤 등장 ───────── */
+.rise{ opacity:0; transform:translateY(20px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.3,1); }
+.rise.in{ opacity:1; transform:none; }
+
+/* ───────── 반응형 ───────── */
+@media (max-width:900px){
+  :root{ --section:64px; }
+  .timeline{ grid-template-columns:1fr; gap:32px; }
+  .foot-grid{ grid-template-columns:1fr; }
+}
+@media (max-width:640px){
+  .nav{ height:64px; }
+  .nav ul{ gap:14px; }
+  .nav a{ font-size:13px; }
+  .brand .bname{ font-size:17px; }
+  .nav-cta{ display:none; }
+  .info li{ grid-template-columns:80px 1fr; gap:10px; }
+}
+@media (prefers-reduced-motion:reduce){
+  *{ animation:none !important; transition:none !important; }
+  .rise{ opacity:1; transform:none; }
+  html{ scroll-behavior:auto; }
+}

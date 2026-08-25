@@ -1,0 +1,9 @@
+# OS / 편집기가 만드는 부스러기 파일
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~

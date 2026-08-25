@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hunyeon Doma - Premium Smoked Meat</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#ffb59a",
+                        "surface": "#fcf9f4",
+                        "on-secondary-fixed-variant": "#683c12",
+                        "on-tertiary-fixed-variant": "#4b4641",
+                        "outline-variant": "#ddc0b7",
+                        "primary-fixed": "#ffdbcf",
+                        "surface-container-low": "#f6f3ee",
+                        "primary-container": "#9c3d14",
+                        "surface-bright": "#fcf9f4",
+                        "background": "#fcf9f4",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#380d00",
+                        "surface-dim": "#dcdad5",
+                        "secondary": "#845328",
+                        "on-secondary-fixed": "#2e1500",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#5f5a55",
+                        "on-surface": "#1c1c19",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e5e2dd",
+                        "on-primary-fixed-variant": "#802900",
+                        "tertiary-fixed": "#e9e1db",
+                        "on-surface-variant": "#57423b",
+                        "primary": "#7b2700",
+                        "tertiary-fixed-dim": "#cdc5bf",
+                        "on-primary-container": "#ffc7b3",
+                        "on-tertiary-container": "#dad2cb",
+                        "tertiary": "#47433e",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#ffb59a",
+                        "surface-container": "#f0ede8",
+                        "on-tertiary-fixed": "#1e1b17",
+                        "on-secondary-container": "#78491f",
+                        "secondary-container": "#fdbc87",
+                        "outline": "#8a726a",
+                        "surface-container-highest": "#e5e2dd",
+                        "surface-container-high": "#ebe8e3",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#a04017",
+                        "inverse-surface": "#31302d",
+                        "inverse-on-surface": "#f3f0eb",
+                        "secondary-fixed": "#ffdcc2",
+                        "secondary-fixed-dim": "#f9b985",
+                        "on-background": "#1c1c19"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "margin-edge": "40px",
+                        "container-max": "1280px",
+                        "section-padding": "120px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["beVietnamPro", "sans-serif"],
+                        "label-sm": ["jetbrainsMono", "monospace"],
+                        "headline-md": ["beVietnamPro", "sans-serif"],
+                        "display-42": ["beVietnamPro", "sans-serif"],
+                        "body-lg": ["notoSans", "sans-serif"],
+                        "body-md": ["notoSans", "sans-serif"],
+                        "headline-lg": ["beVietnamPro", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-42": ["120px", { "lineHeight": "110px", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                        "body-lg": ["18px", { "lineHeight": "32px", "letterSpacing": "0.02em", "fontWeight": "300" }],
+                        "body-md": ["16px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "300" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&family=JetBrains+Mono:wght@400&family=Noto+Sans:wght@300;400&display=swap');
+        body { font-family: 'Noto Sans', sans-serif; background-color: #fcf9f4; }
+        .font-beVietnamPro { font-family: 'Be Vietnam Pro', sans-serif; }
+        .font-jetbrainsMono { font-family: 'JetBrains Mono', monospace; }
+        .brutalist-border { border: 1px solid #dcdad5; }
+        .brutalist-border-dark { border: 1px solid #5f5a55; }
+        /* Minimalist-Brutalist sharp corners */
+        * { border-radius: 0 !important; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased transition-colors duration-300">
+<!-- Navigation (TopNavBar) -->
+<nav class="sticky top-0 z-50 flex justify-between items-center w-full px-margin-edge py-4 bg-surface dark:bg-inverse-surface border-b border-outline dark:border-on-surface-variant">
+<div class="flex items-center gap-4">
+<img alt="Hunyeon Doma Logo" class="h-10 w-10 object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkusrdz8EdzWngqLrNcuyM6CNvpPFJzSP6ODHEX0FsmOnjSpo-eFYDl2LKA3pxU2DWJYYrkbjZpYcMfmOaBUe6V20_LV73lJBemE_oSQAqCap-gfymRqaqmnDkvddNJO-yNb7ckOPoJk4BU_FFO_uo3BpKfERYoouIyC2vw0uwURcQlmMTp_dIizQ1sSwgLWauqDibTRbjo84OW6NI0pNwHnERKqjdYScGXODZaZf8B22t90ORlPS4"/>
+<span class="font-headline-md text-headline-md font-bold text-on-surface dark:text-inverse-on-surface hidden sm:block">Hunyeon Doma</span>
+</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-label-sm text-label-sm transition-opacity duration-150" href="#">첫 화면</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary font-label-sm text-label-sm transition-colors duration-200" href="#">메뉴판</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary font-label-sm text-label-sm transition-colors duration-200" href="#">소식받기</a>
+</div>
+<button class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-container dark:hover:bg-surface-container-highest transition-colors duration-200 p-2" id="darkModeToggle">
+<span class="material-symbols-outlined" data-weight="fill">dark_mode</span>
+</button>
+</nav>
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-margin-edge py-section-padding md:py-24 md:min-h-[80vh] flex flex-col md:flex-row items-center gap-gutter border-b border-surface-variant">
+<div class="w-full md:w-1/2 flex flex-col items-start gap-8 z-10 relative">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg font-bold tracking-tight text-on-surface">훈연도마</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md border-l-2 border-primary pl-4">
+                42시간을 기다린 고기를 눈앞에서 썰어드리는,<br/>고기 냄새는 나지 않는 고기집
+            </p>
+<div class="flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto">
+<button class="bg-primary-container text-on-primary hover:bg-primary transition-colors duration-300 px-8 py-4 font-label-sm text-label-sm tracking-wider w-full sm:w-auto">
+                    전체 메뉴 보기
+                </button>
+<button class="bg-transparent border border-on-surface text-on-surface hover:bg-on-surface hover:text-surface transition-colors duration-300 px-8 py-4 font-label-sm text-label-sm tracking-wider w-full sm:w-auto">
+                    영업시간·찾아오는 길
+                </button>
+</div>
+</div>
+<div class="w-full md:w-1/2 h-[500px] md:h-[700px] relative mt-12 md:mt-0 overflow-hidden brutalist-border p-2 bg-surface-container">
+<img alt="Premium Smoked Meat Brisket" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvj3OZ-AQ5fTAwM-4x4lWcqpiI2PQAV9T21bvzx8HUpBjEgqpn2VhiPyFUFXO8Uk4glLMBCaksXKcK7O1z1hTU-xmlyucOwql1kjJtoLCNp1UAaOC8O8yI2iX93Rl6ej7g1WVslGSse_h8oKVwXTZpv2xfxMD9TGDoeq2CAyNzLun53UhE5XEw7I3r3HqvCyCAVlA65Ryw9rcetFO0iJqudDz92D4SB2OQF_Pdv_lmxmyVCJTekj-G"/>
+</div>
+</section>
+<!-- Highlights Section (42 Hours) -->
+<section class="bg-inverse-surface text-inverse-on-surface py-section-padding relative overflow-hidden">
+<div class="absolute inset-0 flex items-center justify-center opacity-10 select-none pointer-events-none">
+<span class="font-display-42 text-display-42 whitespace-nowrap text-inverse-on-surface">42 HOURS</span>
+</div>
+<div class="max-w-container-max mx-auto px-margin-edge relative z-10 flex flex-col gap-16">
+<div class="w-full h-px bg-surface-variant opacity-20"></div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter text-center md:text-left">
+<div class="flex flex-col gap-4 items-center md:items-start group">
+<span class="font-jetbrainsMono text-inverse-primary text-sm tracking-widest uppercase">Phase 01</span>
+<h3 class="font-headline-md text-headline-md">건염 24시간</h3>
+<div class="w-8 h-8 bg-inverse-primary group-hover:scale-110 transition-transform duration-300 mt-4"></div>
+</div>
+<div class="flex flex-col gap-4 items-center md:items-start group">
+<span class="font-jetbrainsMono text-inverse-primary text-sm tracking-widest uppercase">Phase 02</span>
+<h3 class="font-headline-md text-headline-md">훈연 14시간</h3>
+<div class="w-8 h-8 bg-inverse-primary group-hover:scale-110 transition-transform duration-300 mt-4"></div>
+</div>
+<div class="flex flex-col gap-4 items-center md:items-start group">
+<span class="font-jetbrainsMono text-inverse-primary text-sm tracking-widest uppercase">Phase 03</span>
+<h3 class="font-headline-md text-headline-md">레스팅 4시간</h3>
+<div class="w-8 h-8 bg-inverse-primary group-hover:scale-110 transition-transform duration-300 mt-4"></div>
+</div>
+</div>
+<div class="w-full h-px bg-surface-variant opacity-20"></div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full px-margin-edge py-section-padding grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto bg-surface-container-highest dark:bg-inverse-surface border-t border-outline dark:border-on-surface-variant text-on-surface-variant dark:text-surface-variant">
+<div class="flex flex-col gap-4 col-span-1 md:col-span-2">
+<span class="font-headline-md text-headline-md font-bold text-on-surface dark:text-inverse-on-surface">Hunyeon Doma</span>
+<p class="font-body-md text-body-md max-w-xs mt-2">© Hunyeon Doma. All Rights Reserved.</p>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-primary dark:text-inverse-primary font-bold mb-2">INFO</span>
+<p class="font-body-md text-body-md">17:00-23:00</p>
+<p class="font-body-md text-body-md text-sm opacity-80">(Last order 22:00)</p>
+<p class="font-body-md text-body-md mt-2">Closed on Mondays</p>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-primary dark:text-inverse-primary font-bold mb-2">CONTACT</span>
+<a class="font-body-md text-body-md hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Address</a>
+<a class="font-body-md text-body-md hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors" href="#">Phone</a>
+<a class="font-body-md text-body-md hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors mt-2" href="#">Instagram</a>
+</div>
+</footer>
+<script>
+        const html = document.documentElement;
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        
+        darkModeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const icon = darkModeToggle.querySelector('span');
+            if (html.classList.contains('dark')) {
+                icon.textContent = 'light_mode';
+            } else {
+                icon.textContent = 'dark_mode';
+            }
+        });
+    </script>
+</body></html>

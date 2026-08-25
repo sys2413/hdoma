@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>메뉴판 — 훈연도마</title>
+<meta name="description" content="사장이 썰어서 내는 훈연 라인과, 직접 구워 드시는 직화 라인. 그리고 사장님 추천 조합.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>
+  // 새로고침할 때 화면이 번쩍이지 않도록, 그리기 전에 미리 정합니다.
+  try {
+    var t = localStorage.getItem('hoonyeon-theme');
+    if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<style>
+  /* ───────── 메뉴판 전용 ───────── */
+
+  /* 두 라인 안내 — 1px 테두리 박스 */
+  .lines{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(16px,2.5vw,24px); margin-top:clamp(36px,5vw,52px); }
+  .line-card{ border:1px solid var(--ink); padding:clamp(24px,3vw,32px); }
+  .line-card .tag{ font-family:var(--mono); font-size:12px; letter-spacing:.1em; color:var(--ember); margin-bottom:14px; }
+  .line-card h3{ font-size:22px; margin-bottom:12px; }
+  .line-card p{ font-size:14px; line-height:26px; color:var(--ink-soft); }
+
+  /* ───────── 대표 메뉴 ───────── */
+  .dish{ border-top:1px solid var(--line); padding-block:clamp(40px,6vw,72px); }
+  .dish:last-of-type{ border-bottom:1px solid var(--line); }
+  .dish-grid{ display:grid; grid-template-columns:minmax(280px,360px) 1fr 240px; gap:clamp(24px,3.5vw,52px); align-items:start; }
+  .dish-photo{ margin:0; }
+  .dish-photo img{ width:100%; aspect-ratio:3/2; object-fit:cover; }
+  .dish-head{ padding-bottom:24px; margin-bottom:28px; border-bottom:1px solid var(--line); }
+  .dish .no{ font-family:var(--mono); font-size:12px; letter-spacing:.1em; color:var(--ember); margin-bottom:12px; }
+  .dish h3{ font-size:clamp(30px,4vw,44px); line-height:1.1; letter-spacing:-.03em; margin-bottom:10px; }
+  .dish .en{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; color:var(--ink-faint); }
+  .dish .desc{
+    font-family:var(--reading); font-weight:400;
+    font-size:17.5px; line-height:35px; letter-spacing:.005em;
+    color:var(--ink-soft); max-width:42ch;
+    word-break:keep-all; text-wrap:pretty;
+  }
+  .dish .desc b{ font-weight:600; color:var(--ink); }
+  .dish .story{
+    margin-top:32px; padding:24px 26px; background:var(--bg);
+    border-left:2px solid var(--wood);
+    font-family:var(--reading); font-weight:400;
+    font-size:15px; line-height:30px; letter-spacing:.005em;
+    color:var(--ink-soft); max-width:42ch;
+    word-break:keep-all; text-wrap:pretty;
+  }
+  .dish .story .who{ display:block; font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ember); margin-bottom:10px; }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:28px; }
+  .chip{
+    font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--wood);
+    border:1px solid var(--line-warm); padding:7px 14px;
+  }
+  .pricebox{ border-top:1px solid var(--ink); padding-top:20px; }
+  .pricebox .cap{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; color:var(--ink-faint); margin-bottom:14px; }
+  .priceline{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:12px 0; }
+  .priceline + .priceline{ border-top:1px solid var(--line); }
+  .priceline .g{ font-size:14px; color:var(--ink-faint); }
+  .priceline .w{ font-family:var(--display); font-weight:700; font-size:24px; letter-spacing:-.02em; white-space:nowrap; font-variant-numeric:tabular-nums; }
+
+  /* ───────── 나머지 가격표 ───────── */
+  .etc{ background:var(--bg); }
+  .table-scroll{ overflow-x:auto; border-top:1px solid var(--ink); }
+  table{ width:100%; border-collapse:collapse; min-width:560px; }
+  th, td{ text-align:left; padding:18px 12px; border-bottom:1px solid var(--line); }
+  th{ font-family:var(--mono); font-size:11px; font-weight:400; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); }
+  tbody tr{ transition:background-color .2s; }
+  tbody tr:hover{ background:var(--surface); }
+  td:first-child{ font-family:var(--display); font-weight:600; font-size:17px; letter-spacing:-.01em; white-space:nowrap; }
+  td:nth-child(2){ font-size:14px; line-height:24px; color:var(--ink-soft); }
+  td:last-child, th:last-child{ text-align:right; }
+  td:last-child{ font-family:var(--display); font-weight:700; font-size:17px; white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .grp td{
+    padding-top:34px; border-bottom:1px solid var(--ink); text-align:left; white-space:normal;
+    font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ember);
+  }
+  .grp:first-child td{ padding-top:14px; }
+  .grp:hover{ background:transparent; }
+  .sauce{
+    margin-top:clamp(28px,4vw,40px); display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px;
+    padding:22px 24px; border:1px solid var(--line);
+  }
+  .sauce .h{ font-family:var(--display); font-weight:700; font-size:17px; }
+  .sauce .s{ font-size:14px; color:var(--ink-soft); }
+  .sauce .free{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; color:#fff; background:var(--ember); padding:5px 12px; }
+
+  /* ───────── 사장님 추천 조합 ───────── */
+  .pairing{ background:var(--char); color:var(--on-char); position:relative; overflow:hidden; }
+  .pairing .ghost{
+    position:absolute; top:6%; right:-2%; font-family:var(--display); font-weight:800;
+    font-size:clamp(120px,17vw,260px); line-height:1; letter-spacing:-.04em;
+    color:rgba(255,255,255,.04); pointer-events:none; user-select:none;
+  }
+  .pairing .wrap{ position:relative; }
+  .pairing .label{ color:var(--ember-lt); }
+  .pairing .label::after{ background:var(--char-line); }
+  .pairing h2{ color:var(--on-char-hi); }
+  .pairing .sub{ color:rgba(243,240,235,.62); }
+
+  .combos{ display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:clamp(16px,2.2vw,24px); align-items:stretch; }
+  .combo{
+    position:relative; display:flex; flex-direction:column;
+    border:1px solid var(--char-line); padding:clamp(26px,3vw,36px);
+    transition:border-color .3s, background-color .3s;
+  }
+  .combo:hover{ border-color:var(--ember-lt); background:rgba(255,255,255,.03); }
+  .combo.pick{ border-color:var(--ember-lt); background:rgba(224,129,74,.07); }
+  .combo .badge{
+    position:absolute; top:0; right:0;
+    background:var(--ember-lt); color:#231F1B;
+    font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:.1em; padding:7px 14px;
+  }
+  .combo .who{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ember-lt); margin-bottom:20px; }
+  .combo h3{ font-size:19px; line-height:1.5; color:var(--on-char-hi); margin-bottom:18px; }
+  .combo.pick h3{ font-size:23px; }
+  .combo .sum{
+    font-family:var(--display); font-weight:700; font-size:28px; letter-spacing:-.02em;
+    color:var(--on-char-hi); padding-bottom:20px; margin-bottom:20px;
+    border-bottom:1px solid var(--char-line); font-variant-numeric:tabular-nums;
+  }
+  .combo p{ font-size:14px; line-height:28px; color:rgba(243,240,235,.62); flex:1; }
+  .pairing-foot{ margin-top:clamp(28px,4vw,40px); font-size:14px; color:rgba(243,240,235,.5); }
+
+  /* ───────── 주문 전에 ───────── */
+  .notice-list{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(20px,3vw,36px); }
+  .notice-list li{ border-top:1px solid var(--ink); padding-top:22px; font-size:14px; line-height:28px; color:var(--ink-soft); }
+  .notice-list b{ display:block; font-family:var(--display); font-size:18px; color:var(--ink); font-weight:700; margin-bottom:12px; letter-spacing:-.01em; }
+
+  .pagenav{
+    display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between; align-items:center;
+    margin-top:clamp(44px,6vw,64px); padding-top:clamp(32px,4vw,44px); border-top:1px solid var(--line);
+  }
+
+  /* 반응형 */
+  @media (max-width:1080px){
+    .dish-grid{ grid-template-columns:minmax(240px,320px) 1fr; }
+    .dish .pricebox{ grid-column:2; }
+  }
+  @media (max-width:900px){
+    .lines{ grid-template-columns:1fr; }
+    .dish-grid{ grid-template-columns:1fr; gap:28px; }
+    .dish .pricebox{ grid-column:1; }
+    .dish-photo img{ aspect-ratio:16/9; }
+    .dish .desc, .dish .story{ max-width:52ch; }
+    .combos{ grid-template-columns:1fr; }
+    .notice-list{ grid-template-columns:1fr; }
+  }
+  @media (max-width:640px){
+    .pagenav{ flex-direction:column; align-items:stretch; }
+    .pagenav .btn{ text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<header id="topbar">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12.5 12H8a2.5 2.5 0 0 0-2.5 2.5v10A2.5 2.5 0 0 0 8 27h9.5a2.5 2.5 0 0 0 2.5-2.5V18"/>
+        <path d="M12.5 12V8.6a2.25 2.25 0 1 1 4.5 0"/>
+        <path d="M17.4 24.5c-1.7-2.3 1.7-3.8 0-6.1s1.5-4 1.5-4"/>
+        <path d="M22.6 21.4c-1.7-2.3 1.7-3.8 0-6.1s1.5-4 1.5-4"/>
+        <path d="M27.6 18.6c-1.4-1.9 1.4-3.1 0-5"/>
+      </svg>
+      <span class="bname">훈연도마</span>
+    </a>
+    <div class="nav-right">
+      <nav>
+        <ul>
+          <li><a href="index.html">첫 화면</a></li>
+          <li><a href="menu.html" aria-current="page">메뉴판</a></li>
+          <li><a href="subscribe.html">소식받기</a></li>
+        </ul>
+      </nav>
+      <button class="themetoggle" id="themeToggle" type="button"
+              aria-label="어두운 모드로 바꾸기" title="어두운 모드" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span>
+      </button>
+      <a class="nav-cta" href="tel:0200000000">예약 문의</a>
+    </div>
+  </div>
+</header>
+
+<!-- ───────── 페이지 머리 ───────── -->
+<div class="pagehead">
+  <span class="stamp" aria-hidden="true">42</span>
+  <div class="wrap">
+    <a class="backlink" href="index.html"><span aria-hidden="true">←</span> 첫 화면으로</a>
+    <p class="label">Menu</p>
+    <h1>전체 메뉴</h1>
+    <p class="sub">이 가게는 라인이 둘입니다. 훈연 라인은 사장이 썰어서 내고, 직화 라인은 손님이 직접 구우십니다.</p>
+
+    <div class="lines">
+      <div class="line-card">
+        <p class="tag">LINE 01</p>
+        <h3>훈연 — 사장이 썰어서 냅니다</h3>
+        <p>미리 훈연해둔 고기를 주문받은 뒤 꺼내, 나무도마에서 먹기 좋은 크기로 썰어 야채·소스와 함께 내어드립니다.</p>
+      </div>
+      <div class="line-card">
+        <p class="tag">LINE 02</p>
+        <h3>직화 — 손님이 직접 구우십니다</h3>
+        <p>익숙한 그 방식 그대로. 굽는 테이블은 연기 흡입이 잘 되어서 옷에 냄새가 배지 않습니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ───────── 42시간 공정 ───────── -->
+<div class="strip">
+  <span class="ghost" aria-hidden="true">42 HOURS</span>
+  <div class="wrap rise">
+    <p class="label" style="color:var(--ember-lt)">The Process</p>
+    <dl class="timeline">
+      <div class="phase">
+        <span class="p">PHASE 01</span>
+        <dt>건염 24시간</dt>
+        <span class="mark" aria-hidden="true"></span>
+        <dd>소금과 후추만 발라 냉장고에서 재웁니다.</dd>
+      </div>
+      <div class="phase">
+        <span class="p">PHASE 02</span>
+        <dt>훈연 14시간</dt>
+        <span class="mark" aria-hidden="true"></span>
+        <dd>110℃ 낮은 불에서 참나무 칩으로.</dd>
+      </div>
+      <div class="phase">
+        <span class="p">PHASE 03</span>
+        <dt>레스팅 4시간</dt>
+        <span class="mark" aria-hidden="true"></span>
+        <dd>다 익은 뒤에도 그대로 둡니다. 여기서 육즙이 자리를 잡습니다.</dd>
+      </div>
+    </dl>
+    <p class="strip-note">훈연을 더 오래 한다고 더 부드러워지지는 않습니다. 14시간을 넘기면 오히려 퍼석해집니다. 칼이 스윽 들어가는 건 <b>훈연 시간이 아니라, 온도를 낮게 오래 유지한 결과</b>입니다.</p>
+  </div>
+</div>
+
+<!-- ───────── 대표 메뉴 3가지 ───────── -->
+<section id="smoked">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <p class="label">Signature</p>
+      <h2>사장이 썰어서 내는 세 가지</h2>
+      <p class="sub">주방 앞 카운터석에 앉으시면 써는 걸 가장 가까이서 보실 수 있습니다.</p>
+    </div>
+
+    <!-- 01 브리스킷 -->
+    <article class="dish rise">
+      <div class="dish-grid">
+        <figure class="dish-photo frame">
+          <img src="images/menu-brisket.jpg" alt="검은 껍질이 앉은 브리스킷 덩어리가 돌판 위에서 결대로 썰려 있는 모습">
+        </figure>
+        <div>
+          <div class="dish-head">
+            <p class="no">01</p>
+            <h3>브리스킷</h3>
+            <p class="en">BRISKET · 훈연스테이크</p>
+          </div>
+          <p class="desc">겉은 검은 껍질처럼 단단한데, <b>칼을 대면 속이 무너집니다.</b> 손으로 잡으면 결대로 툭 갈라져요. 저희가 티비에서 본 “생크림처럼” 그 장면에 제일 가까운 고기입니다.</p>
+          <p class="story">
+            <span class="who">단골의 주문</span>
+            저녁 8시에 오시는 그 손님은 자리에 앉자마자 “훈연스테이크 2인분이요~” 하십니다. 그게 이겁니다. 매번 같은 걸 시키시는데, 데려오시는 분은 매번 다릅니다.
+          </p>
+          <div class="chips">
+            <span class="chip">CURE 24H</span>
+            <span class="chip">SMOKE 14H</span>
+            <span class="chip">REST 4H</span>
+          </div>
+        </div>
+        <div class="pricebox">
+          <p class="cap">PRICE</p>
+          <div class="priceline"><span class="g">200g</span><span class="w">38,000</span></div>
+          <div class="priceline"><span class="g">400g</span><span class="w">72,000</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 비프립 -->
+    <article class="dish rise">
+      <div class="dish-grid">
+        <figure class="dish-photo frame">
+          <img src="images/menu-beefrib.jpg" alt="윤기 나는 소갈비 한 대가 나무도마 위에 뼈째 통으로 올라가 있는 모습">
+        </figure>
+        <div>
+          <div class="dish-head">
+            <p class="no">02</p>
+            <h3>비프립</h3>
+            <p class="en">BEEF RIB</p>
+          </div>
+          <p class="desc">소갈비 한 대를 뼈째 통으로 냅니다. <b>도마에 올리는 순간 “이걸 다요?” 하고 놀라는</b>, 비주얼로 먼저 때리는 메뉴입니다.</p>
+          <p class="story">
+            <span class="who">이 메뉴가 있는 이유</span>
+            저희가 만들고 싶은 건 맛보다 먼저 오는 표정입니다. 이건 입에 넣기 전부터 그 표정이 나옵니다. 여럿이 오셔서 같이 보실 때 제일 좋습니다.
+          </p>
+          <div class="chips">
+            <span class="chip">SMOKE 9H</span>
+            <span class="chip">BONE-IN</span>
+          </div>
+        </div>
+        <div class="pricebox">
+          <p class="cap">PRICE</p>
+          <div class="priceline"><span class="g">1대 · 약 500g</span><span class="w">89,000</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 번트엔드 -->
+    <article class="dish rise">
+      <div class="dish-grid">
+        <figure class="dish-photo frame">
+          <img src="images/menu-burntends.jpg" alt="소스를 입혀 반질반질한 한입 크기 번트엔드가 검은 슬레이트 접시에 담긴 모습">
+        </figure>
+        <div>
+          <div class="dish-head">
+            <p class="no">03</p>
+            <h3>번트엔드</h3>
+            <p class="en">BURNT ENDS</p>
+          </div>
+          <p class="desc">브리스킷 끝부분을 한입 크기로 잘라 소스를 입혀 한 번 더 훈연한 것. <b>겉이 반질반질한 고기 사탕 같습니다.</b></p>
+          <p class="story">
+            <span class="who">처음 오신 분께</span>
+            소스로 간을 더할 수 있어서 부담이 없습니다. 한 조각 집어 드시고 나면, 그다음에 나오는 브리스킷이 왜 다른지 바로 아시게 됩니다.
+          </p>
+          <div class="chips">
+            <span class="chip">42H BASE</span>
+            <span class="chip">SAUCE +3H</span>
+          </div>
+        </div>
+        <div class="pricebox">
+          <p class="cap">PRICE</p>
+          <div class="priceline"><span class="g">150g</span><span class="w">24,000</span></div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ───────── 나머지 메뉴 가격표 ───────── -->
+<section class="etc" id="etc">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <p class="label">Price List</p>
+      <h2>나머지 메뉴</h2>
+      <p class="sub">직접 구워 드시는 직화 라인과, 곁들이는 것들입니다.</p>
+    </div>
+
+    <div class="table-scroll rise">
+      <table>
+        <tbody>
+          <tr class="grp"><td colspan="3">Direct Fire — 직접 구워 드세요</td></tr>
+          <tr><td>채끝 200g</td><td>훈연 고기 먹기 전 입을 여는 자리</td><td>42,000</td></tr>
+          <tr><td>살치살 150g</td><td>기름 적고 결이 고운 부위</td><td>39,000</td></tr>
+          <tr><td>삼겹살 200g</td><td>익숙한 맛도 하나는 있어야 하니까</td><td>18,000</td></tr>
+          <tr class="grp"><td colspan="3">Sides &amp; Rice — 곁들임 · 식사</td></tr>
+          <tr><td>훈연 육수 냉면</td><td>훈연하고 남은 육수로 뽑은 면 · 마무리용</td><td>11,000</td></tr>
+          <tr><td>구운 야채 플레이트</td><td>고기 옆자리를 지키는 것</td><td>9,000</td></tr>
+          <tr><td>공기밥</td><td></td><td>2,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sauce rise">
+      <span class="h">소스 3종</span>
+      <span class="free">FREE</span>
+      <span class="s">스모크 바비큐 · 홀그레인 머스터드 · 소금+후추</span>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 사장님 추천 조합 ───────── -->
+<section class="pairing" id="combo">
+  <span class="ghost" aria-hidden="true">PICK</span>
+  <div class="wrap">
+    <div class="sec-head rise">
+      <p class="label">Owner&rsquo;s Pick</p>
+      <h2>사장님 추천 조합</h2>
+      <p class="sub">뭘 시켜야 할지 모르시겠으면, 이 셋 중 하나로 시작하시면 됩니다.</p>
+    </div>
+
+    <div class="combos rise">
+      <article class="combo pick">
+        <span class="badge">추천</span>
+        <p class="who">처음 오셨다면 · 둘이서</p>
+        <h3>번트엔드 + 브리스킷 200g + 공기밥</h3>
+        <p class="sum">약 64,000원</p>
+        <p>번트엔드로 먼저 이 집 훈연 향을 보시고, 브리스킷에서 놀라시면 됩니다. 순서가 반대면 번트엔드가 심심해집니다.</p>
+      </article>
+      <article class="combo">
+        <p class="who">놀래키고 싶은 자리 · 셋 이상</p>
+        <h3>비프립 1대 + 번트엔드 + 구운 야채</h3>
+        <p class="sum">약 122,000원</p>
+        <p>도마에 통으로 올라가는 걸 같이 보는 게 절반입니다. 그래서 이 조합은 주방 앞 카운터석을 권합니다.</p>
+      </article>
+      <article class="combo">
+        <p class="who">고기 좀 아신다면 · 둘이서</p>
+        <h3>채끝 200g + 브리스킷 400g</h3>
+        <p class="sum">약 114,000원</p>
+        <p>방금 구운 것과 42시간 기다린 것을 나란히 놓고 드시는 조합입니다. 같은 소인데 왜 다른지, 설명 없이 아실 겁니다.</p>
+      </article>
+    </div>
+
+    <p class="pairing-foot rise">인원과 입맛에 맞춰 조금씩 바꿔 드려도 됩니다. 편하게 말씀해주세요.</p>
+  </div>
+</section>
+
+<!-- ───────── 주문 전에 ───────── -->
+<section id="before">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <p class="label">Before You Order</p>
+      <h2>주문 전에 하나만</h2>
+    </div>
+    <ul class="notice-list rise">
+      <li><b>무한리필은 하지 않습니다</b>고기가 무제한 나오는 것보다, 질 좋은 고기가 저희 가게의 자신감입니다.</li>
+      <li><b>훈연 고기는 사장이 썹니다</b>직접 구우실 수 없습니다. 대신 직화 라인은 얼마든지 직접 구우셔도 됩니다.</li>
+      <li><b>준비된 만큼만 냅니다</b>42시간이 걸리는 고기라, 일찍 마감되는 날이 있습니다. 오시기 전에 한 번 물어봐 주세요.</li>
+    </ul>
+
+    <div class="pagenav rise">
+      <a class="btn btn-line" href="index.html">← 첫 화면으로 돌아가기</a>
+      <a class="btn btn-solid" href="subscribe.html">오늘 남은 고기 · 예약 소식 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 푸터 ───────── -->
+<footer id="hours">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand rise">
+        <p class="shopname-sm">훈연도마</p>
+        <p>42시간을 기다린 고기를 눈앞에서 썰어드립니다.</p>
+        <dl class="hours">
+          <dt>Hours</dt>
+          <dd>17:00 – 23:00<small>라스트오더 22:00</small></dd>
+          <dt>Closed</dt>
+          <dd>매주 월요일</dd>
+        </dl>
+      </div>
+
+      <div class="rise">
+        <ul class="info">
+          <li><span class="k">Seats</span><span>주방 카운터석 8석 + 테이블 6개</span></li>
+          <li><span class="k">Booking</span><span>전화 예약 권장 · 필수는 아닙니다</span></li>
+          <li><span class="k">Parking</span><span>가능 — 건물 뒤편 주차장</span></li>
+          <li><span class="k">Address</span><span>서울 성동구 성수이로 00, 1층</span></li>
+          <li><span class="k">Phone</span><span><a href="tel:0200000000">02-000-0000</a></span></li>
+          <li><span class="k">Instagram</span><span><a href="https://instagram.com" target="_blank" rel="noopener">@hoonyeon_doma</a></span></li>
+          <li><span class="k">KakaoTalk</span><span>채널 · 훈연도마</span></li>
+        </ul>
+        <p class="counter-note">주방 앞 카운터석은 예약 시 말씀해주세요. 고기 써는 걸 가장 가까이서 보실 수 있는 자리입니다.</p>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <span>© 2026 훈연도마 — The Art of 42 Hours</span>
+      <span>가격 · 주소 · 전화 · SNS는 아직 가상입니다</span>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+
+</body>
+</html>

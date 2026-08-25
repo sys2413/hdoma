@@ -1,0 +1,292 @@
+<!DOCTYPE html><html lang="ko"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>소식받기 - Hunyeon Doma</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700;800&amp;family=JetBrains+Mono:wght@400&amp;family=Noto+Sans:wght@300&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#cdc5bf",
+                        "primary": "#7b2700",
+                        "outline-variant": "#ddc0b7",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1c1c19",
+                        "on-background": "#1c1c19",
+                        "on-tertiary-container": "#dad2cb",
+                        "surface-variant": "#e5e2dd",
+                        "on-secondary-container": "#78491f",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#31302d",
+                        "tertiary": "#47433e",
+                        "on-tertiary-fixed-variant": "#4b4641",
+                        "surface-container": "#f0ede8",
+                        "on-tertiary-fixed": "#1e1b17",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#5f5a55",
+                        "secondary": "#845328",
+                        "on-surface-variant": "#57423b",
+                        "surface-container-low": "#f6f3ee",
+                        "on-error-container": "#93000a",
+                        "background": "#fcf9f4",
+                        "inverse-on-surface": "#f3f0eb",
+                        "primary-fixed-dim": "#ffb59a",
+                        "surface-tint": "#a04017",
+                        "on-secondary-fixed": "#2e1500",
+                        "on-primary-fixed": "#380d00",
+                        "on-secondary-fixed-variant": "#683c12",
+                        "surface-container-highest": "#e5e2dd",
+                        "outline": "#8a726a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#ffc7b3",
+                        "secondary-container": "#fdbc87",
+                        "surface-dim": "#dcdad5",
+                        "tertiary-fixed": "#e9e1db",
+                        "surface-container-high": "#ebe8e3",
+                        "primary-container": "#9c3d14",
+                        "surface": "#fcf9f4",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#ffdbcf",
+                        "inverse-primary": "#ffb59a",
+                        "secondary-fixed": "#ffdcc2",
+                        "surface-bright": "#fcf9f4",
+                        "secondary-fixed-dim": "#f9b985",
+                        "on-primary-fixed-variant": "#802900",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "margin-edge": "40px",
+                        "unit": "8px",
+                        "gutter": "24px",
+                        "section-padding": "120px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["beVietnamPro"],
+                        "headline-lg": ["beVietnamPro"],
+                        "headline-lg-mobile": ["beVietnamPro"],
+                        "body-md": ["notoSans"],
+                        "label-sm": ["jetbrainsMono"],
+                        "body-lg": ["notoSans"],
+                        "display-42": ["beVietnamPro"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "300" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "32px", "letterSpacing": "0.02em", "fontWeight": "300" }],
+                        "display-42": ["120px", { "lineHeight": "110px", "letterSpacing": "-0.04em", "fontWeight": "800" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #fcf9f4; color: #1c1c19; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24; }
+        .thin-border { border: 1px solid #dcdad5; }
+        .thick-accent-left { border-left: 4px solid #1c1c19; padding-left: 1rem; }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-edge h-16 max-w-container-max mx-auto bg-surface border-b border-outline-variant">
+<div class="font-headline-md text-headline-md font-bold tracking-tight text-on-surface">Hunyeon Doma</div>
+<div class="hidden md:flex gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-headline-md text-headline-md pb-1 border-b border-transparent hover:border-primary" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 font-headline-md text-headline-md pb-1 border-b border-transparent hover:border-primary" href="#">Menu</a>
+<a class="text-primary border-b border-primary pb-1 font-headline-md text-headline-md" href="#">News</a>
+</div>
+<button class="bg-primary-container text-on-primary rounded-none px-6 py-2 font-label-sm text-label-sm uppercase tracking-widest hover:bg-surface-tint transition-colors">Reserve Now</button>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-32 pb-section-padding max-w-container-max mx-auto w-full px-margin-edge">
+<!-- Header -->
+<header class="mb-24 relative">
+<a class="inline-flex items-center gap-2 text-on-surface-variant hover:text-primary mb-8 font-label-sm text-label-sm uppercase tracking-widest transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">arrow_left_alt</span>
+                첫 화면으로
+            </a>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-6">소식받기</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">42시간의 훈연, 그 기다림의 과정에서 들려오는 조용한 이야기들을 전합니다. 필요한 소식만 선택하여 받아보세요.</p>
+<div class="absolute top-0 right-0 opacity-5 pointer-events-none select-none">
+<span class="font-display-42 text-display-42">42</span>
+</div>
+</header>
+<!-- News Types (4 Cards) -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-0 border border-surface-dim mb-32 relative z-10 bg-surface">
+<div class="p-8 border-b md:border-b-0 md:border-r border-surface-dim hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-3xl text-primary mb-6 block">restaurant</span>
+<h3 class="font-headline-md text-headline-md mb-2">새로운 고기</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">계절에 맞는 특별한 부위와 새로운 숙성 방식에 대한 소식.</p>
+</div>
+<div class="p-8 border-b md:border-b-0 md:border-r border-surface-dim hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-3xl text-primary mb-6 block">school</span>
+<h3 class="font-headline-md text-headline-md mb-2">훈연 클래스</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">42시간의 비밀을 엿볼 수 있는 소규모 마스터 클래스 안내.</p>
+</div>
+<div class="p-8 border-b md:border-b-0 md:border-r border-surface-dim hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-3xl text-primary mb-6 block">calendar_today</span>
+<h3 class="font-headline-md text-headline-md mb-2">이벤트</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">특별한 날을 위한 다이닝 이벤트 및 프라이빗 대관 소식.</p>
+</div>
+<div class="p-8 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-3xl text-primary mb-6 block">info</span>
+<h3 class="font-headline-md text-headline-md mb-2">오늘의 정보</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">그날그날 최상의 컨디션을 자랑하는 추천 메뉴와 페어링 정보.</p>
+</div>
+</section>
+<!-- Real-world Examples (Quotes) -->
+<section class="mb-32">
+<h2 class="font-headline-md text-headline-md mb-12 border-b border-surface-dim pb-4">이런 이야기들을 전합니다 다다다</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="thick-accent-left">
+<p class="font-body-lg text-body-lg italic text-on-surface-variant mb-4">"이번 주말, 제주 흑돼지 프렌치랙이 42시간의 훈연을 마칩니다. 벚나무 칩의 향이 특히 잘 배어들었습니다."</p>
+<span class="font-label-sm text-label-sm text-outline uppercase">- 새로운 고기 알림</span>
+</div>
+<div class="thick-accent-left">
+<p class="font-body-lg text-body-lg italic text-on-surface-variant mb-4">"다음 달 첫째 주 금요일, 훈연 도마의 수석 셰프와 함께하는 '육류 숙성의 기초' 클래스가 열립니다. 단 6분만 모십니다."</p>
+<span class="font-label-sm text-label-sm text-outline uppercase">- 훈연 클래스 초대</span>
+</div>
+<div class="thick-accent-left">
+<p class="font-body-lg text-body-lg italic text-on-surface-variant mb-4">"연말을 맞아 시그니처 42시간 코스에 어울리는 내추럴 와인 3종 페어링을 새롭게 준비했습니다."</p>
+<span class="font-label-sm text-label-sm text-outline uppercase">- 이벤트 및 프로모션</span>
+</div>
+<div class="thick-accent-left">
+<p class="font-body-lg text-body-lg italic text-on-surface-variant mb-4">"오늘 저녁 다이닝을 예약하신 분들께 알립니다. 비가 오는 날씨를 고려해, 조금 더 따뜻하고 깊은 맛의 한우 스지가 추가로 서브될 예정입니다."</p>
+<span class="font-label-sm text-label-sm text-outline uppercase">- 오늘의 정보</span>
+</div>
+</div>
+</section>
+<!-- What we don't send -->
+<section class="mb-32 p-12 border-2 border-dotted border-outline-variant bg-surface-container-low flex flex-col md:flex-row items-start gap-8">
+<div class="text-error bg-error-container p-4 rounded-none flex-shrink-0">
+<span class="material-symbols-outlined text-4xl block">warning</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-4">이런 것은 보내지 않습니다</h3>
+<ul class="font-body-md text-body-md text-on-surface-variant space-y-2 list-disc list-inside">
+<li class="">무분별한 광고성 스팸 메일</li>
+<li class="">고객의 동의 없는 제3자 정보 제공</li>
+<li class="">매일 쏟아지는 불필요한 알림 (한 달에 2~3회만 발송)</li>
+</ul>
+</div>
+</section>
+<!-- Subscription Form -->
+<section class="bg-[#2E2A26] text-on-secondary p-12 md:p-24 rounded-none relative overflow-hidden">
+<div class="relative z-10 max-w-3xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg mb-4 text-surface">이야기를 들어볼까요?</h2>
+<p class="font-body-md text-body-md text-tertiary-fixed-dim mb-12">원하시는 소식의 종류를 선택하고 연락처를 남겨주세요.</p>
+<form class="space-y-12" id="subscription-form">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<label class="block font-label-sm text-label-sm text-tertiary-fixed-dim uppercase tracking-widest mb-2" for="name">이름</label>
+<input class="w-full bg-transparent border-0 border-b border-surface-dim focus:ring-0 focus:border-primary-fixed text-surface font-body-md py-2 px-0 placeholder-tertiary-fixed-dim/50" id="name" name="name" placeholder="홍길동" required="" type="text">
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-tertiary-fixed-dim uppercase tracking-widest mb-2" for="email">이메일</label>
+<input class="w-full bg-transparent border-0 border-b border-surface-dim focus:ring-0 focus:border-primary-fixed text-surface font-body-md py-2 px-0 placeholder-tertiary-fixed-dim/50" id="email" name="email" placeholder="example@email.com" required="" type="email">
+</div>
+</div>
+<div>
+<span class="block font-label-sm text-label-sm text-tertiary-fixed-dim uppercase tracking-widest mb-4">관심 있는 소식 (다중 선택 가능)</span>
+<div class="flex flex-wrap gap-4">
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="interests" type="checkbox" value="meat">
+<div class="px-6 py-2 border border-surface-dim text-tertiary-fixed-dim peer-checked:bg-primary-container peer-checked:border-primary-container peer-checked:text-on-primary transition-colors font-body-md rounded-none">새로운 고기</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="interests" type="checkbox" value="class">
+<div class="px-6 py-2 border border-surface-dim text-tertiary-fixed-dim peer-checked:bg-primary-container peer-checked:border-primary-container peer-checked:text-on-primary transition-colors font-body-md rounded-none">훈연 클래스</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="interests" type="checkbox" value="event">
+<div class="px-6 py-2 border border-surface-dim text-tertiary-fixed-dim peer-checked:bg-primary-container peer-checked:border-primary-container peer-checked:text-on-primary transition-colors font-body-md rounded-none">이벤트</div>
+</label>
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="interests" type="checkbox" value="info">
+<div class="px-6 py-2 border border-surface-dim text-tertiary-fixed-dim peer-checked:bg-primary-container peer-checked:border-primary-container peer-checked:text-on-primary transition-colors font-body-md rounded-none">오늘의 정보</div>
+</label>
+</div>
+</div>
+<button class="w-full bg-primary-container hover:bg-surface-tint text-on-primary py-4 font-headline-md text-headline-md transition-colors rounded-none mt-8" type="submit">소식 받아볼게요</button>
+</form>
+</div>
+<!-- Absolute decorative lines for Brutalist feel within the dark section -->
+<div class="absolute top-0 bottom-0 left-12 w-px bg-surface/10 pointer-events-none hidden md:block"></div>
+<div class="absolute top-12 left-0 right-0 h-px bg-surface/10 pointer-events-none hidden md:block"></div>
+</section>
+<!-- Completion Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden items-center justify-center bg-surface/95 backdrop-blur-sm p-4" id="completion-modal">
+<div class="bg-surface border border-on-surface p-12 max-w-lg w-full text-center relative shadow-none">
+<button class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface" id="close-modal" type="button">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+<div class="w-20 h-20 mx-auto border-2 border-primary-container flex items-center justify-center mb-8 rounded-none">
+<span class="material-symbols-outlined text-4xl text-primary-container">check</span>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-4">고맙습니다, <span id="subscriber-name" class="">고객</span>님.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">Hunyeon Doma의 조용한 이야기에 귀 기울여 주셔서 감사합니다. 곧 첫 번째 소식을 전해드리겠습니다.</p>
+<p class="font-headline-md text-headline-md text-primary italic">"자, 먹으면 더 놀랍니다~"</p>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-section-padding px-margin-edge flex flex-col md:flex-row justify-between items-start gap-gutter max-w-container-max mx-auto bg-surface-container-highest border-t border-outline-variant">
+<div class="font-headline-md text-headline-md text-on-surface">© 2024 Hunyeon Doma. The Art of 42 Hours.</div>
+<div class="flex flex-wrap gap-6 font-body-md text-body-md">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Menu</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Space</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Instagram</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Facebook</a>
+</div>
+</footer>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('subscription-form');
+            const modal = document.getElementById('completion-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const nameInput = document.getElementById('name');
+            const subscriberNameSpan = document.getElementById('subscriber-name');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = nameInput.value.trim() || '고객';
+                subscriberNameSpan.textContent = name;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            });
+
+            const closeModal = () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                form.reset();
+            };
+
+            closeModalBtn.addEventListener('click', closeModal);
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+
+
+</body></html>

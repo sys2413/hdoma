@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hunyeon Doma - News Subscription</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&amp;family=Noto+Sans:wght@300;400;600&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#cdc5bf",
+                      "primary": "#7b2700",
+                      "outline-variant": "#ddc0b7",
+                      "error-container": "#ffdad6",
+                      "on-surface": "#1c1c19",
+                      "on-background": "#1c1c19",
+                      "on-tertiary-container": "#dad2cb",
+                      "surface-variant": "#e5e2dd",
+                      "on-secondary-container": "#78491f",
+                      "on-secondary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "inverse-surface": "#31302d",
+                      "tertiary": "#47433e",
+                      "on-tertiary-fixed-variant": "#4b4641",
+                      "surface-container": "#f0ede8",
+                      "on-tertiary-fixed": "#1e1b17",
+                      "error": "#ba1a1a",
+                      "tertiary-container": "#5f5a55",
+                      "secondary": "#845328",
+                      "on-surface-variant": "#57423b",
+                      "surface-container-low": "#f6f3ee",
+                      "on-error-container": "#93000a",
+                      "background": "#fcf9f4",
+                      "inverse-on-surface": "#f3f0eb",
+                      "primary-fixed-dim": "#ffb59a",
+                      "surface-tint": "#a04017",
+                      "on-secondary-fixed": "#2e1500",
+                      "on-primary-fixed": "#380d00",
+                      "on-secondary-fixed-variant": "#683c12",
+                      "surface-container-highest": "#e5e2dd",
+                      "outline": "#8a726a",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-container": "#ffc7b3",
+                      "secondary-container": "#fdbc87",
+                      "surface-dim": "#dcdad5",
+                      "tertiary-fixed": "#e9e1db",
+                      "surface-container-high": "#ebe8e3",
+                      "primary-container": "#9c3d14",
+                      "surface": "#fcf9f4",
+                      "on-error": "#ffffff",
+                      "primary-fixed": "#ffdbcf",
+                      "inverse-primary": "#ffb59a",
+                      "secondary-fixed": "#ffdcc2",
+                      "surface-bright": "#fcf9f4",
+                      "secondary-fixed-dim": "#f9b985",
+                      "on-primary-fixed-variant": "#802900",
+                      "on-tertiary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max": "1280px",
+                      "margin-edge": "40px",
+                      "unit": "8px",
+                      "gutter": "24px",
+                      "section-padding": "120px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Be Vietnam Pro"
+                      ],
+                      "headline-lg": [
+                              "Be Vietnam Pro"
+                      ],
+                      "headline-lg-mobile": [
+                              "Be Vietnam Pro"
+                      ],
+                      "body-md": [
+                              "Noto Sans"
+                      ],
+                      "label-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "body-lg": [
+                              "Noto Sans"
+                      ],
+                      "display-42": [
+                              "Be Vietnam Pro"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "28px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "300"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "300"
+                              }
+                      ],
+                      "display-42": [
+                              "120px",
+                              {
+                                      "lineHeight": "110px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "800"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface antialiased flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-edge h-16 max-w-container-max mx-auto bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-4">
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center" href="#">
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+<div class="font-headline-md text-headline-md font-bold tracking-tight text-on-surface dark:text-inverse-on-surface">
+                Hunyeon Doma
+            </div>
+</div>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors duration-200" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors duration-200" href="#">Menu</a>
+<a class="text-primary dark:text-primary-fixed-dim border-b border-primary dark:border-primary-fixed-dim pb-1 hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors duration-200" href="#">News</a>
+</div>
+<button class="bg-primary-container text-on-primary px-4 py-2 font-label-sm text-label-sm uppercase hover:bg-surface-tint transition-colors rounded-none">
+            Reserve Now
+        </button>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-[120px] pb-16 px-6 md:px-margin-edge max-w-container-max mx-auto w-full flex flex-col gap-12">
+<header class="flex flex-col gap-2">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg">Stay Informed</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">Updates on our process, seasonal shifts, and rare cuts. Delivered deliberately.</p>
+</header>
+<!-- News Type Cards (2x2 Grid on Mobile) -->
+<section class="grid grid-cols-2 gap-4">
+<div class="border border-outline-variant p-4 flex flex-col items-start gap-4">
+<span class="material-symbols-outlined text-outline">calendar_month</span>
+<span class="font-label-sm text-label-sm uppercase text-on-surface">Seasonal Menus</span>
+</div>
+<div class="border border-outline-variant p-4 flex flex-col items-start gap-4">
+<span class="material-symbols-outlined text-outline">local_fire_department</span>
+<span class="font-label-sm text-label-sm uppercase text-on-surface">Process Notes</span>
+</div>
+<div class="border border-outline-variant p-4 flex flex-col items-start gap-4">
+<span class="material-symbols-outlined text-outline">cut</span>
+<span class="font-label-sm text-label-sm uppercase text-on-surface">Rare Cuts</span>
+</div>
+<div class="border border-outline-variant p-4 flex flex-col items-start gap-4">
+<span class="material-symbols-outlined text-outline">wine_bar</span>
+<span class="font-label-sm text-label-sm uppercase text-on-surface">Pairings</span>
+</div>
+</section>
+<!-- Subscription Section -->
+<section class="bg-inverse-surface text-inverse-on-surface p-6 md:p-12 flex flex-col gap-8 rounded-none">
+<div class="flex flex-col gap-2">
+<h2 class="font-headline-md text-headline-md">Subscribe</h2>
+<p class="font-body-md text-body-md text-surface-variant">Join our list. We respect your time.</p>
+</div>
+<form class="flex flex-col gap-6 w-full">
+<div class="flex flex-col gap-2 w-full">
+<label class="font-label-sm text-label-sm uppercase text-surface-variant" for="email">Email Address</label>
+<input class="bg-transparent border-b border-surface-variant p-2 font-body-md text-body-md text-inverse-on-surface focus:outline-none focus:border-primary-fixed-dim rounded-none w-full" id="email" placeholder="Enter your email" type="email"/>
+</div>
+<button class="w-full bg-primary-container text-on-primary font-headline-md text-headline-md py-4 hover:bg-surface-tint transition-colors rounded-none mt-4" type="button">
+                    Subscribe
+                </button>
+</form>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface w-full py-section-padding px-margin-edge flex flex-col md:flex-row justify-between items-start gap-gutter max-w-container-max mx-auto border-t border-outline-variant dark:border-outline">
+<div class="flex flex-col gap-4 w-full md:w-auto">
+<div class="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface">Hunyeon Doma</div>
+<p class="font-body-md text-body-md text-primary dark:text-primary-fixed-dim">© 2024 Hunyeon Doma. The Art of 42 Hours.</p>
+</div>
+<div class="flex flex-col md:flex-row gap-4 md:gap-8 w-full md:w-auto">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Menu</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Space</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Contact</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Instagram</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Facebook</a>
+</div>
+</footer>
+</body></html>
